@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+env/
+
+# Django
+/media/
+staticfiles/
+
+# Node
+node_modules/
+dist/
+.pos-frontend/
+
+# Env files
+.env
+*.env
+
+# Docker
+*.log

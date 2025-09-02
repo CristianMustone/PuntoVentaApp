@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: pos-db
+    restart: always
+    env_file: .env.prod
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend.prod
+    container_name: pos-backend
+    restart: always
+    env_file: .env.prod
+    depends_on:
+      - db
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend.prod
+    container_name: pos-web
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8080:80" # En el server, tu Nginx reverse proxy externo puede apuntar al 8080 de este stack
+    volumes:
+      - static_volume:/usr/share/nginx/html/static
+      - media_volume:/usr/share/nginx/html/media
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

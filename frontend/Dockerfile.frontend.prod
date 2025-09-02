@@ -1,0 +1,18 @@
+# Build Angular
+FROM node:20 AS build
+WORKDIR /app
+COPY pos-frontend/package*.json ./
+RUN npm ci
+COPY pos-frontend/ ./
+RUN npm run build
+
+# Nginx para servir build + proxy /api
+FROM nginx:alpine
+COPY --from=build /app/dist/pos-frontend /usr/share/nginx/html
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# (opcional) directorios estáticos del backend montados por volumen
+RUN mkdir -p /usr/share/nginx/html/static /usr/share/nginx/html/media
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
