@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './pos.html',
   styleUrl: './pos.scss'
 })
-export class Pos {
+export class PosPage {
 
 }

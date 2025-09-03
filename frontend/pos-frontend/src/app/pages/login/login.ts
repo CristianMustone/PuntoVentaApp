@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
   templateUrl: './login.html',
-  styleUrl: './login.scss'
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ]
 })
-export class Login {
+export class LoginPage {
+  constructor(private router: Router) {}
 
-}
+  onLogin() {
+    // Aquí podrías validar usuario/contraseña
+    this.router.navigate(['/dashboard']);
+  }}
