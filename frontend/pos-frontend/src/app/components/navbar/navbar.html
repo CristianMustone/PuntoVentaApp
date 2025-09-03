@@ -1,1 +1,49 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary" class="shadow-md flex justify-between">
+  <!-- Logo o título -->
+  <div class="flex items-center gap-2">
+    <mat-icon>store</mat-icon>
+    <span class="font-bold text-lg">Ingrese su Logo</span>
+  </div>
+
+  <!-- Botones de navegación -->
+  <div class="flex gap-4">
+    <button
+      mat-raised-button
+      color="accent"
+      class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+      routerLink="/inventario"
+    >
+      <mat-icon>inventory_2</mat-icon>
+      Inventario
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+      routerLink="/reportes"
+    >
+      <mat-icon>bar_chart</mat-icon>
+      Reportes
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+      routerLink="/configuracion"
+    >
+      <mat-icon>settings</mat-icon>
+      Configuración
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+      routerLink="/configuracion"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

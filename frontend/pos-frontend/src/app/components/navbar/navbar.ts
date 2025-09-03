@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  styleUrl: './navbar.scss',
 })
-export class Navbar {
-
-}
+export class NavbarComponent {}
