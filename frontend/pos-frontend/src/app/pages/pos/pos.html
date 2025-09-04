@@ -1,5 +1,21 @@
 <app-navbar></app-navbar>
 
+<div class="w-full flex items-center bg-white rounded-lg shadow-md px-4 py-2 my-4">
+  <mat-icon class="text-gray-400 mr-2">search</mat-icon>
+  <input
+    type="text"
+    placeholder="Buscar producto..."
+    class="flex-1 border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400"
+  />
+  <button
+    mat-raised-button
+    color="primary"
+    class="ml-2 px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transition-all"
+  >
+    Buscar
+  </button>
+</div>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
   <app-product-card></app-product-card>
   <app-product-card></app-product-card>

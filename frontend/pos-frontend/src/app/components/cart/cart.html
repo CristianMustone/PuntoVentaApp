@@ -1,0 +1,65 @@
+<div class="w-full max-w-md bg-white rounded-lg shadow-lg flex flex-col">
+  <!-- 🔹 Header: código de barras -->
+  <div class="flex items-center gap-2 border-b px-4 py-3">
+    <mat-icon class="text-gray-500">qr_code_scanner</mat-icon>
+    <input
+      type="text"
+      placeholder="Ingresar código de producto"
+      class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+    <button mat-raised-button color="primary" class="ml-2 rounded-lg shadow-md">Agregar</button>
+  </div>
+
+  <!-- 🔹 Lista de productos -->
+  <div class="flex-1 overflow-y-auto px-4 py-3 space-y-3">
+    <!-- Producto -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-lg shadow-sm px-3 py-2">
+      <div class="flex flex-col">
+        <span class="font-semibold text-gray-800">Producto A</span>
+        <span class="text-sm text-gray-500">$120</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button mat-mini-fab color="primary">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span class="font-medium text-gray-700">2</span>
+        <button mat-mini-fab color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Otro producto -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-lg shadow-sm px-3 py-2">
+      <div class="flex flex-col">
+        <span class="font-semibold text-gray-800">Producto B</span>
+        <span class="text-sm text-gray-500">$75</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button mat-mini-fab color="primary">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span class="font-medium text-gray-700">1</span>
+        <button mat-mini-fab color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 Footer -->
+  <div class="border-t px-4 py-3 flex justify-between gap-3">
+    <button mat-stroked-button color="warn" class="flex-1 rounded-lg font-semibold">
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" class="flex-1 rounded-lg font-semibold">
+      Comprar
+    </button>
+  </div>
+</div>

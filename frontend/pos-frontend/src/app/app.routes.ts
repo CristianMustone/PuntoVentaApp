@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: '', component: LoginPage },
   { path: 'dashboard', component: PosPage },
   { path: 'inventario', component: Inventory },
-  { path: 'reportes', component: Settings },
-  { path: 'configuracion', component: Reports },
+  { path: 'reportes', component: Reports },
+  { path: 'configuracion', component: Settings },
 ];

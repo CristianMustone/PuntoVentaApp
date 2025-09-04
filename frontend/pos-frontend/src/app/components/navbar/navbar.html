@@ -11,7 +11,7 @@
       mat-raised-button
       color="accent"
       class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-      routerLink="/inventario"
+      (click)="inventarioButton()"
     >
       <mat-icon>inventory_2</mat-icon>
       Inventario
@@ -21,7 +21,7 @@
       mat-raised-button
       color="accent"
       class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-      routerLink="/reportes"
+      (click)="reportesButton()"
     >
       <mat-icon>bar_chart</mat-icon>
       Reportes
@@ -31,19 +31,10 @@
       mat-raised-button
       color="accent"
       class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-      routerLink="/configuracion"
+      (click)="configuracionButton()"
     >
       <mat-icon>settings</mat-icon>
       Configuración
-    </button>
-
-    <button
-      mat-raised-button
-      color="accent"
-      class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-      routerLink="/configuracion"
-    >
-      <mat-icon>shopping_cart</mat-icon>
     </button>
   </div>
 </mat-toolbar>
