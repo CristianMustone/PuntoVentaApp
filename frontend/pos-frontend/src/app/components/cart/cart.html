@@ -1,5 +1,8 @@
-<div class="w-full max-w-md bg-white rounded-lg shadow-lg flex flex-col">
-  <!-- 🔹 Header: código de barras -->
+<!-- 🔹 Carrito lateral derecho -->
+<div
+  class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-white shadow-2xl rounded-2xl flex flex-col z-50"
+>
+  <!-- Header: código de barras -->
   <div class="flex items-center gap-2 border-b px-4 py-3">
     <mat-icon class="text-gray-500">qr_code_scanner</mat-icon>
     <input
@@ -10,7 +13,7 @@
     <button mat-raised-button color="primary" class="ml-2 rounded-lg shadow-md">Agregar</button>
   </div>
 
-  <!-- 🔹 Lista de productos -->
+  <!-- Lista de productos -->
   <div class="flex-1 overflow-y-auto px-4 py-3 space-y-3">
     <!-- Producto -->
     <div class="flex items-center justify-between bg-gray-50 rounded-lg shadow-sm px-3 py-2">
@@ -53,7 +56,7 @@
     </div>
   </div>
 
-  <!-- 🔹 Footer -->
+  <!-- Footer -->
   <div class="border-t px-4 py-3 flex justify-between gap-3">
     <button mat-stroked-button color="warn" class="flex-1 rounded-lg font-semibold">
       Cancelar
