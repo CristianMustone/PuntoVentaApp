@@ -11,6 +11,16 @@
       mat-raised-button
       color="accent"
       class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+      (click)="dashboardButton()"
+    >
+      <mat-icon>dashboard</mat-icon>
+      Main
+    </button>
+
+    <button
+      mat-raised-button
+      color="accent"
+      class="flex items-center gap-2 px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
       (click)="inventarioButton()"
     >
       <mat-icon>inventory_2</mat-icon>

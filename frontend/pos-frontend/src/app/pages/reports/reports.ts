@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { NavbarComponent } from '../../components/navbar/navbar';
+import { Productstable } from '../../components/productstable/productstable';
 
 @Component({
   selector: 'app-reports',
-  imports: [],
+  imports: [NavbarComponent,Productstable],
   templateUrl: './reports.html',
   styleUrl: './reports.scss'
 })

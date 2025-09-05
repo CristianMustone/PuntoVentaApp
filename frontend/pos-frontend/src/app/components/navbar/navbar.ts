@@ -13,6 +13,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   constructor(private router: Router) {}
 
+  dashboardButton() {
+    this.router.navigate(['/dashboard']);
+  }
+
   inventarioButton() {
     this.router.navigate(['/inventario']);
   }
