@@ -1,21 +1,22 @@
 <app-navbar></app-navbar>
 
-<!-- <div class="w-full flex items-center bg-white rounded-lg shadow-md px-4 py-2 my-4">
-  <mat-icon class="text-gray-400 mr-2">search</mat-icon>
-  <input
-    type="text"
-    placeholder="Buscar producto..."
-    class="flex-1 border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400"
-  />
+<div class="flex items-center justify-between mb-4">
+  <!-- 🔍 Barra de búsqueda -->
+  <div class="flex-1">
+    <app-searchbar></app-searchbar>
+  </div>
+
+  <!-- 🛒 Botón ver carrito -->
   <button
     mat-raised-button
     color="primary"
-    class="ml-2 px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transition-all"
+    (click)="toggleCarrito()"
+    class="ml-4 flex items-center gap-2 rounded-lg shadow-md hover:shadow-lg transition-all"
   >
-    Buscar
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Ver carrito</span>
   </button>
-</div> -->
-<app-searchbar></app-searchbar>
+</div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
   <app-product-card></app-product-card>
@@ -23,4 +24,10 @@
   <app-product-card></app-product-card>
   <app-product-card></app-product-card>
   <app-product-card></app-product-card>
+  <app-product-card></app-product-card>
+  <app-product-card></app-product-card>
+  <app-product-card></app-product-card>
+  <app-product-card></app-product-card>
 </div>
+
+<app-cart *ngIf="carritoVisible"></app-cart>
