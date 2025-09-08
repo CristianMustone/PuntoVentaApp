@@ -1,1 +1,50 @@
 <app-navbar></app-navbar>
+
+<div class="flex justify-center items-center h-3/4">
+  <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">
+      Configuración del Local
+    </h2>
+
+    <form class="space-y-6">
+      <!-- Nombre del local -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Nombre del Local</label>
+        <input
+          type="text"
+          placeholder="Ej: Mi Tienda POS"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Logo -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Logo</label>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onLogoSelected($event)"
+          class="w-full text-gray-600"
+        />
+        <div *ngIf="logoPreview" class="mt-4 flex justify-center">
+          <img
+            [src]="logoPreview"
+            alt="Vista previa del logo"
+            class="h-32 w-32 object-cover rounded-full shadow"
+          />
+        </div>
+      </div>
+
+      <!-- Botón Guardar -->
+      <div class="flex justify-center">
+        <button
+          mat-raised-button
+          color="primary"
+          class="px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all"
+        >
+          Guardar cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
