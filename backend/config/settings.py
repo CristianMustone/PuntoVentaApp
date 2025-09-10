@@ -1,4 +1,6 @@
 from pathlib import Path
+from datetime import timedelta
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,8 +21,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'apps.usuarios',
+    'apps.productos',
+    'apps.ventas',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,12 +67,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'POS_DB',
-        'USER': 'IngCris',
+        'NAME': 'posdb',
+        'USER': 'cristian',
         'PASSWORD': '0112358',
         'HOST': 'localhost',
         'PORT': '5432',
     }
+}
+
+AUTH_USER_MODEL = 'usuarios.CustomUser'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # ⏳ sesión dura 30 min
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # 🔄 se puede refrescar durante 7 días
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -97,3 +118,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
