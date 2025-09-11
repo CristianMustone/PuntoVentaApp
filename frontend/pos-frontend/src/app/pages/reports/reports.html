@@ -1,50 +1,69 @@
 <app-navbar></app-navbar>
 
+<div class="w-full flex gap-3 m-6">
+  <button
+    mat-raised-button
+    color="primary"
+    class="w-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
+    (click)="ventasReports()"
+  >
+    Reportes de ventas
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="w-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
+    (click)="stockReports()"
+  >
+    Productos con bajo stock
+  </button>
+</div>
+
 <div class="p-6 space-y-8">
   <!-- Sección de Ventas -->
-  <div class="bg-white shadow-md rounded-xl p-6">
+  <div class="bg-white shadow-md rounded-xl p-6" *ngIf="reportTpype === 'ventas'">
     <h1 class="text-2xl font-bold text-gray-800 mb-2">📊 Ventas</h1>
 
-
     <!-- Filtros -->
-     <div class="flex justify-between items-center mb-4">
+    <div class="flex justify-between items-center mb-4">
       <h2 class="text-lg text-gray-500">Descargar informes de ventas</h2>
-    <div class="flex flex-wrap gap-3">
-      <button
-        mat-raised-button
-        color="primary"
-        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
-      >
-        Hoy
-      </button>
-      <button
-        mat-raised-button
-        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
-      >
-        Esta semana
-      </button>
-      <button
-        mat-raised-button
-        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
-      >
-        Este mes
-      </button>
-      <button
-        mat-raised-button
-        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
-      >
-        Todas las ventas
-      </button>
-    </div>
+      <div class="flex flex-wrap gap-3">
+        <button
+          mat-raised-button
+          color="primary"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
+        >
+          Hoy
+        </button>
+        <button
+          mat-raised-button
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
+        >
+          Esta semana
+        </button>
+        <button
+          mat-raised-button
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
+        >
+          Este mes
+        </button>
+        <button
+          mat-raised-button
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
+        >
+          Todas las ventas
+        </button>
+      </div>
     </div>
 
     <!-- Tabla de ventas -->
-      <h2 class="text-lg font-semibold text-gray-700 mb-4">Ventas de hoy</h2>
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Ventas de hoy</h2>
     <app-productstable></app-productstable>
   </div>
 
   <!-- Sección de productos con bajo stock -->
-  <div class="bg-white shadow-md rounded-xl p-6">
+  <div class="bg-white shadow-md rounded-xl p-6" *ngIf="reportTpype === 'stock'">
     <h1 class="text-2xl font-bold text-gray-800 mb-4">⚠️ Productos con bajo stock</h1>
     <app-productstable></app-productstable>
   </div>
