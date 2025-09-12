@@ -11,6 +11,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",  # Angular dev
+    "http://127.0.0.1:4200",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 # Application definition
 
@@ -26,6 +33,7 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.productos',
     'apps.ventas',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -42,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

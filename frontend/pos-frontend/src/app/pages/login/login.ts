@@ -1,25 +1,32 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // ajusta la ruta según tu estructura
+import { AuthService } from '../../services/authUser/auth-user'; // ajusta la ruta según tu estructura
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
+  imports: [FormsModule, HttpClientModule],
+  // providers: [AuthService],
   templateUrl: './login.html',
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ]
+  styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  constructor(private router: Router) {}
+  username: string = '';
+  password: string = '';
+
+  constructor(private router: Router, private authService: AuthService) {}
 
   onLogin() {
-    // Aquí podrías validar usuario/contraseña
-    this.router.navigate(['/dashboard']);
-  }}
+    this.authService.login(this.username, this.password).subscribe({
+      next: () => {
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error('Error de login:', err);
+        alert('Usuario o contraseña incorrectos');
+      },
+    });
+  }
+}
