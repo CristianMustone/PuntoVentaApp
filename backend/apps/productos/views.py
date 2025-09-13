@@ -14,7 +14,7 @@ class ProductoListView(generics.ListAPIView):
 
 # 2️⃣ Productos con stock bajo (menor al valor enviado por query param)
 class ProductoStockBajoView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         limite = request.query_params.get("limite", 10)  # default: 10
@@ -33,12 +33,12 @@ class ProductoUpdateView(generics.UpdateAPIView):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
     lookup_field = "cod_barras"  # editamos usando código de barras
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 # 4️⃣ Eliminar un producto específico (soft delete)
 class ProductoDeleteView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, cod_barras):
         producto = get_object_or_404(Producto, cod_barras=cod_barras)

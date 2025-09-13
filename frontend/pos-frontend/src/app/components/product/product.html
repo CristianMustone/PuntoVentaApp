@@ -10,14 +10,12 @@
 
   <!-- Contenido -->
   <div class="p-4 space-y-2">
-    <h3 class="text-lg font-bold text-gray-800">Producto A</h3>
-    <p class="text-gray-600 text-sm">
-      Descripción breve del producto, ideal para mostrar en catálogo.
-    </p>
+    <h3 class="text-lg font-bold text-gray-800">{{ producto.nombre_producto }}</h3>
+    <p class="text-gray-600 text-sm">Código: {{ producto.cod_barras }}</p>
 
     <!-- Precio o acción -->
     <div class="flex justify-between items-center mt-3">
-      <span class="text-blue-600 font-semibold text-lg">$1200</span>
+      <span class="text-blue-600 font-semibold text-lg">${{ producto.precio }}</span>
       <button mat-raised-button color="primary" class="rounded-lg px-4 py-2 text-sm font-medium">
         Agregar
       </button>

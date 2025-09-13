@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
-import { Productstable } from '../../components/productstable/productstable';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { FewProducts } from '../../components/fewproducts/fewproducts';
+import { SalesTable } from '../../components/salestable/salestable';
 
 @Component({
   selector: 'app-reports',
-  imports: [NavbarComponent, Productstable, MatButtonModule, CommonModule],
+  imports: [NavbarComponent, MatButtonModule, CommonModule, FewProducts, SalesTable],
   templateUrl: './reports.html',
   styleUrl: './reports.scss',
 })

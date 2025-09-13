@@ -6,13 +6,13 @@ import { MatTableModule } from '@angular/material/table';
 import { Producto, ProductosService } from '../../services/products/products';
 
 @Component({
-  selector: 'app-productstable',
+  selector: 'app-salestable',
   imports: [MatIconModule, MatButtonModule, MatTableModule, CommonModule],
-  templateUrl: './productstable.html',
-  styleUrl: './productstable.scss',
+  templateUrl: './salestable.html',
+  styleUrl: './salestable.scss',
 })
-export class Productstable implements OnInit {
-  displayedColumns: string[] = ['nombre', 'precio', 'cantidad', 'codigo', 'editar', 'eliminar'];
+export class SalesTable implements OnInit {
+  displayedColumns: string[] = ['nombre', 'precio', 'cantidad', 'codigo'];
   productos: Producto[] = [];
 
   constructor(private productosService: ProductosService) {}

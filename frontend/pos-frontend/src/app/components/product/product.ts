@@ -1,14 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-}
-
+import { Producto } from '../../services/products/products';
 
 @Component({
   selector: 'app-product-card',
@@ -16,4 +9,6 @@ export interface Product {
   imports: [MatButtonModule, MatIconModule],
   templateUrl: './product.html',
 })
-export class ProductComponent {}
+export class ProductComponent {
+  @Input() producto!: Producto;
+}

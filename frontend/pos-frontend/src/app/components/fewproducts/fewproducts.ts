@@ -6,19 +6,19 @@ import { MatTableModule } from '@angular/material/table';
 import { Producto, ProductosService } from '../../services/products/products';
 
 @Component({
-  selector: 'app-productstable',
+  selector: 'app-fewproducts',
   imports: [MatIconModule, MatButtonModule, MatTableModule, CommonModule],
-  templateUrl: './productstable.html',
-  styleUrl: './productstable.scss',
+  templateUrl: './fewproducts.html',
+  styleUrl: './fewproducts.scss',
 })
-export class Productstable implements OnInit {
+export class FewProducts implements OnInit {
   displayedColumns: string[] = ['nombre', 'precio', 'cantidad', 'codigo', 'editar', 'eliminar'];
   productos: Producto[] = [];
 
   constructor(private productosService: ProductosService) {}
 
   ngOnInit(): void {
-    this.productosService.getProductos().subscribe({
+    this.productosService.getProductosStockBajo().subscribe({
       next: (res) => {
         this.productos = res;
       },

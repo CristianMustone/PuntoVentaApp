@@ -7,8 +7,8 @@ from .views import (
 )
 
 urlpatterns = [
-    path("productos/", ProductoListView.as_view(), name="productos-list"),
-    path("productos/stock-bajo/", ProductoStockBajoView.as_view(), name="productos-stock-bajo"),
-    path("productos/<str:cod_barras>/editar/", ProductoUpdateView.as_view(), name="producto-update"),
-    path("productos/<str:cod_barras>/eliminar/", ProductoDeleteView.as_view(), name="producto-delete"),
+    path("", ProductoListView.as_view(), name="productos-list"),
+    path("stock-bajo/", ProductoStockBajoView.as_view(), name="productos-stock-bajo"),
+    path("editar/<str:cod_barras>/", ProductoUpdateView.as_view(), name="producto-update"),
+    path("eliminar/<str:cod_barras>/", ProductoDeleteView.as_view(), name="producto-delete"),
 ]
