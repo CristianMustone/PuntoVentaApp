@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Producto, ProductosService } from '../../services/products/products';
+import { Venta, VentasService } from '../../services/sales/sales';
 
 @Component({
   selector: 'app-salestable',
@@ -12,29 +12,27 @@ import { Producto, ProductosService } from '../../services/products/products';
   styleUrl: './salestable.scss',
 })
 export class SalesTable implements OnInit {
-  displayedColumns: string[] = ['nombre', 'precio', 'cantidad', 'codigo'];
-  productos: Producto[] = [];
+  displayedColumns: string[] = [
+    'fecha',
+    'metodo_pago',
+    'nro_transferencia',
+    'monto_total',
+    'pago',
+    'vuelto',
+    'productos',
+  ];
+  ventas: Venta[] = [];
 
-  constructor(private productosService: ProductosService) {}
+  constructor(private ventasService: VentasService) {}
 
   ngOnInit(): void {
-    this.productosService.getProductos().subscribe({
+    this.ventasService.getVentas().subscribe({
       next: (res) => {
-        this.productos = res;
+        this.ventas = res;
       },
       error: (err) => {
-        console.error('Error cargando productos:', err);
+        console.error('Error cargando ventas:', err);
       },
     });
-  }
-
-  editarProducto(producto: Producto) {
-    console.log('Editar', producto);
-    // Acá más adelante podemos abrir un modal o navegar a un form de edición
-  }
-
-  eliminarProducto(producto: Producto) {
-    console.log('Eliminar', producto);
-    // Acá más adelante conectamos con el servicio DELETE
   }
 }

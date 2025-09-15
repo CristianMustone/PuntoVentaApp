@@ -1,26 +1,49 @@
-<table mat-table [dataSource]="productos" class="mat-elevation-z8 w-full">
-  <!-- Nombre -->
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef>Nombre</th>
-    <td mat-cell *matCellDef="let element">{{ element.nombre_producto }}</td>
+<table mat-table [dataSource]="ventas" class="mat-elevation-z8 w-full">
+  <!-- Fecha -->
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+    <td mat-cell *matCellDef="let element">{{ element.fecha | date : 'dd/MM/yyyy HH:mm:ss' }}</td>
   </ng-container>
 
-  <!-- Precio -->
-  <ng-container matColumnDef="precio">
-    <th mat-header-cell *matHeaderCellDef>Precio</th>
-    <td mat-cell *matCellDef="let element">${{ element.precio }}</td>
+  <!-- Metodo Pago -->
+  <ng-container matColumnDef="metodo_pago">
+    <th mat-header-cell *matHeaderCellDef>Metodo de Pago</th>
+    <td mat-cell *matCellDef="let element">{{ element.metodo_pago }}</td>
   </ng-container>
 
-  <!-- Cantidad -->
-  <ng-container matColumnDef="cantidad">
-    <th mat-header-cell *matHeaderCellDef>Cantidad</th>
-    <td mat-cell *matCellDef="let element">{{ element.cantidad }}</td>
+  <!-- Nro Transferencia -->
+  <ng-container matColumnDef="nro_transferencia">
+    <th mat-header-cell *matHeaderCellDef>Nro Transferencia</th>
+    <td mat-cell *matCellDef="let element">{{ element.nro_transferencia }}</td>
   </ng-container>
 
-  <!-- Código -->
-  <ng-container matColumnDef="codigo">
-    <th mat-header-cell *matHeaderCellDef>Código</th>
-    <td mat-cell *matCellDef="let element">{{ element.cod_barras }}</td>
+  <!-- monto total -->
+  <ng-container matColumnDef="monto_total">
+    <th mat-header-cell *matHeaderCellDef>Monto total</th>
+    <td mat-cell *matCellDef="let element">${{ element.monto_total }}</td>
+  </ng-container>
+
+  <!-- Pago -->
+  <ng-container matColumnDef="pago">
+    <th mat-header-cell *matHeaderCellDef>Pago</th>
+    <td mat-cell *matCellDef="let element">${{ element.pago }}</td>
+  </ng-container>
+
+  <!-- Vuento -->
+  <ng-container matColumnDef="vuelto">
+    <th mat-header-cell *matHeaderCellDef>Vuelto</th>
+    <td mat-cell *matCellDef="let element">${{ element.vuelto }}</td>
+  </ng-container>
+
+  <!-- Ver productos -->
+  <ng-container matColumnDef="productos">
+    <th mat-header-cell *matHeaderCellDef>Ver Productos</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary">
+        <!-- (click)="editarProducto(element)"-->
+        <mat-icon>inventory_2</mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <!-- Header y Rows -->

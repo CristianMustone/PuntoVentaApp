@@ -24,7 +24,6 @@ export class ProductosService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers.get('Authorization'));
     return this.http.get<Producto[]>(`${this.apiUrl}/`, { headers });
   }
 
@@ -34,7 +33,6 @@ export class ProductosService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
     return this.http.get<Producto[]>(`${this.apiUrl}/stock-bajo/?limite=${limite}`, { headers });
   }
 
@@ -44,7 +42,6 @@ export class ProductosService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log('Fetching products with token:', token);
     return this.http.put<Producto>(`${this.apiUrl}/editar/${cod_barras}/`, producto, { headers });
   }
 
@@ -54,7 +51,27 @@ export class ProductosService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log('Fetching products with token:', token);
     return this.http.delete(`${this.apiUrl}/eliminar/${cod_barras}/`, { headers });
+  }
+
+  // 5️⃣ Agregar nuevo producto
+  addProducto(producto: Producto, imagen?: File): Observable<Producto> {
+    const token = localStorage.getItem('access');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const formData = new FormData();
+    formData.append('nombre_producto', producto.nombre_producto);
+    formData.append('precio', producto.precio.toString());
+    formData.append('cantidad', producto.cantidad.toString());
+    formData.append('cod_barras', producto.cod_barras);
+    formData.append('activo', producto.activo.toString()); // nuevo producto siempre activo
+
+    if (imagen) {
+      formData.append('imagen1', imagen); // usamos imagen1 como en tu modelo
+    }
+
+    return this.http.post<Producto>(`${this.apiUrl}/crear/`, formData, { headers });
   }
 }

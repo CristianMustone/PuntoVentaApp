@@ -4,6 +4,7 @@ from .views import (
     ProductoStockBajoView,
     ProductoUpdateView,
     ProductoDeleteView,
+    ProductoCreateView,
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path("stock-bajo/", ProductoStockBajoView.as_view(), name="productos-stock-bajo"),
     path("editar/<str:cod_barras>/", ProductoUpdateView.as_view(), name="producto-update"),
     path("eliminar/<str:cod_barras>/", ProductoDeleteView.as_view(), name="producto-delete"),
+    path("crear/", ProductoCreateView.as_view(), name="producto-create"),
 ]

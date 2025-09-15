@@ -6,19 +6,24 @@
   </div>
 
   <!-- Botón para agregar producto -->
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="agregarProducto()"
-    class="flex items-center"
-  >
+  <button mat-raised-button color="primary" (click)="agregarProducto()" class="flex items-center">
     <mat-icon class="mr-1">add</mat-icon> Agregar producto
   </button>
+</div>
+
+<div class="bg-white shadow-md rounded-xl p-6 mb-4" *ngIf="cargarproducto">
+  <div class="flex justify-end">
+    <mat-icon
+      class="rounded-full text-gray-600 hover:bg-red-600 hover:text-white transition-colors duration-300 cursor-pointer"
+      (click)="agregarProducto()"
+      >close</mat-icon
+    >
+  </div>
+  <app-cargar-producto></app-cargar-producto>
 </div>
 
 <div class="bg-white shadow-md rounded-xl p-6">
   <h1 class="text-2xl font-bold mb-4">📦 Inventario</h1>
 
   <app-productstable></app-productstable>
-
 </div>

@@ -12,7 +12,7 @@ import { Producto, ProductosService } from '../../services/products/products';
   styleUrl: './fewproducts.scss',
 })
 export class FewProducts implements OnInit {
-  displayedColumns: string[] = ['nombre', 'precio', 'cantidad', 'codigo', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'precio', 'cantidad', 'codigo'];
   productos: Producto[] = [];
 
   constructor(private productosService: ProductosService) {}
