@@ -5,49 +5,64 @@ from django.shortcuts import get_object_or_404
 from .models import Producto
 from .serializers import ProductoSerializer
 
-# 1️⃣ Listar todos los productos
+
+# 1️⃣ Listar todos los productos de la empresa del usuario
 class ProductoListView(generics.ListAPIView):
-    queryset = Producto.objects.filter(activo=True)
     serializer_class = ProductoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        empresa = self.request.user.empresa
+        return Producto.objects.filter(activo=True, empresa=empresa)
 
-# 2️⃣ Productos con stock bajo (menor al valor enviado por query param)
+
+# 2️⃣ Productos con stock bajo para la empresa del usuario
 class ProductoStockBajoView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        limite = request.query_params.get("limite", 10)  # default: 10
+        limite = request.query_params.get("limite", 10)
         try:
             limite = int(limite)
         except ValueError:
             limite = 10
 
-        productos = Producto.objects.filter(activo=True, cantidad__lt=limite)
+        empresa = request.user.empresa
+        productos = Producto.objects.filter(
+            activo=True, cantidad__lt=limite, empresa=empresa
+        )
         serializer = ProductoSerializer(productos, many=True)
         return Response(serializer.data)
 
 
-# 3️⃣ Editar un producto específico
+# 3️⃣ Editar un producto específico (de la empresa del usuario)
 class ProductoUpdateView(generics.UpdateAPIView):
-    queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
-    lookup_field = "cod_barras"  # editamos usando código de barras
+    lookup_field = "cod_barras"
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        empresa = self.request.user.empresa
+        return Producto.objects.filter(empresa=empresa)
 
-# 4️⃣ Eliminar un producto específico (soft delete)
+
+# 4️⃣ Eliminar un producto específico (soft delete, solo de su empresa)
 class ProductoDeleteView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, cod_barras):
-        producto = get_object_or_404(Producto, cod_barras=cod_barras)
-        producto.activo = False  # 🔹 soft delete
+        empresa = request.user.empresa
+        producto = get_object_or_404(Producto, cod_barras=cod_barras, empresa=empresa)
+        producto.activo = False
         producto.save()
         return Response({"mensaje": f"Producto {producto.nombre_producto} eliminado correctamente"})
 
-# 5️⃣ Crear un nuevo producto
+
+# 5️⃣ Crear un nuevo producto (asignando empresa automáticamente)
 class ProductoCreateView(generics.CreateAPIView):
-    queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        empresa = self.request.user.empresa
+        serializer.save(empresa=empresa)
