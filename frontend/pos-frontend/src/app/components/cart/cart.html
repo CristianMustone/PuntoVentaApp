@@ -1,42 +1,56 @@
-<!-- 🔹 Carrito lateral derecho -->
-<div
-  class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-white shadow-2xl rounded- flex flex-col z-10"
->
-  <!-- Header: código de barras -->
-  <div class="flex items-center gap-2 border-b px-4 py-3">
-    <mat-icon class="text-gray-500">qr_code_scanner</mat-icon>
-    <input
-      type="text"
-      placeholder="Ingresar código de producto"
-      class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-    <button mat-raised-button color="primary" class="ml-2 rounded-lg shadow-md">Agregar</button>
+<div>
+  <!-- 🔹 Lista de productos -->
+  <div class="overflow-y-scroll h-60">
+    <div class="flex-1 overflow-y-auto px-4 py-3 space-y-3" *ngFor="let item of cartItems">
+      <div class="flex items-center justify-between bg-gray-50 rounded-lg shadow-sm px-3 py-2">
+        <div class="flex flex-col">
+          <span class="font-semibold text-gray-800">{{ item.nombre_producto }}</span>
+          <span class="text-sm text-gray-500">{{ item.precio }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button mat-mini-fab color="primary" (click)="decreaseQuantity(item.cod_barras)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span class="font-medium text-gray-700">{{ item.quantity }}</span>
+          <button mat-mini-fab color="primary" (click)="increaseQuantity(item.cod_barras)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="removeFromCart(item.cod_barras)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
+  <div *ngIf="!paypage">
+    <div class="border-t px-4 py-3 flex justify-between gap-3">
+      <p class="font-semibold text-lg">Total: {{ total | currency : '$ ' }}</p>
+    </div>
 
-
-
-  <!-- Footer -->
-  <div class="border-t px-4 py-3 flex justify-between gap-3">
-    <!-- <button mat-stroked-button color="warn" class="flex-1 rounded-lg font-semibold" (click)="carritoVisible = false">
-      Cancelar
-    </button> -->
-    <button mat-raised-button color="primary" class="flex-1 rounded-lg font-semibold" (click)="showPay()">
-      Comprar
-    </button>
+    <!-- Footer -->
+    <div class="border-t px-4 py-3 flex justify-between gap-3">
+      <button
+        mat-raised-button
+        color="primary"
+        class="flex-1 rounded-lg font-semibold"
+        (click)="showPay()"
+      >
+        Comprar
+      </button>
+    </div>
   </div>
-  
 </div>
 
-<div *ngIf="paypage" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-white shadow-2xl rounded- z-50">
- <button
-  mat-icon-button
-  color="warn"
-  class="fixed mt-3 ml-5 hover:bg-red-600 text-white shadow-md rounded-full"
-  type="button"
-  (click)="showPay()"
->
-  <mat-icon>close</mat-icon>
-</button>
+<div *ngIf="paypage">
+  <button
+    mat-icon-button
+    color="warn"
+    class="fixed mt-3 ml-5 hover:bg-red-600 text-white shadow-md rounded-full"
+    type="button"
+    (click)="showPay()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
 
   <app-pay></app-pay>
 </div>

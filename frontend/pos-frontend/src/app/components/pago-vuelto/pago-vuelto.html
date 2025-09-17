@@ -1,74 +1,70 @@
+<div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Pago</h2>
 
-  <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">
-      Pago
-    </h2>
+  <form class="space-y-6">
+    <!-- Total -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Total</label>
+      <input
+        type="text"
+        [value]="getTotal() | currency : '$ '"
+        disabled
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-100 text-gray-700"
+      />
+    </div>
 
-    <form class="space-y-6">
-      <!-- Total -->
-      <div>
-        <label class="block text-gray-700 font-medium mb-2">Total</label>
-        <input
-          type="text"
-          [value]="total | currency:'ARS'"
-          disabled
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-100 text-gray-700"
-        />
+    <!-- Método de pago -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Método de pago</label>
+      <select
+        [(ngModel)]="metodo"
+        name="metodo"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="efectivo">Efectivo</option>
+        <option value="debito">Débito</option>
+        <option value="credito">Crédito</option>
+        <option value="mercadopago">Mercado Pago</option>
+        <option value="transferencia">Transferencia</option>
+      </select>
+    </div>
+
+    <!-- Campos dinámicos -->
+    <div *ngIf="metodo === 'efectivo'">
+      <!-- Con cuánto paga -->
+      <label class="block text-gray-700 font-medium mb-2">Con cuánto paga</label>
+      <input
+        type="number"
+        [(ngModel)]="montoPagado"
+        name="montoPagado"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        (input)="calcularVuelto()"
+      />
+
+      <!-- Vuelto -->
+      <div class="mt-3">
+        <span class="font-semibold text-gray-700">Vuelto: </span>
+        <span class="text-lg font-bold text-green-600">
+          {{ vuelto | currency : '$ ' }}
+        </span>
       </div>
+    </div>
 
-      <!-- Método de pago -->
-      <div>
-        <label class="block text-gray-700 font-medium mb-2">Método de pago</label>
-        <select
-          [(ngModel)]="metodo"
-          name="metodo"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="efectivo">Efectivo</option>
-          <option value="debito">Débito</option>
-          <option value="credito">Crédito</option>
-          <option value="mercadopago">Mercado Pago</option>
-          <option value="transferencia">Transferencia</option>
-        </select>
-      </div>
+    <!-- Código de transferencia -->
+    <div *ngIf="metodo !== 'efectivo'">
+      <label class="block text-gray-700 font-medium mb-2">Código de transferencia</label>
+      <input
+        type="text"
+        [(ngModel)]="codigoTransferencia"
+        name="codigoTransferencia"
+        placeholder="Ej: 123ABC456"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
 
-      <!-- Campos dinámicos -->
-      <div *ngIf="metodo === 'efectivo'">
-        <!-- Con cuánto paga -->
-        <label class="block text-gray-700 font-medium mb-2">Con cuánto paga</label>
-        <input
-          type="number"
-          [(ngModel)]="montoPagado"
-          name="montoPagado"
-          placeholder="Ej: 5000"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          (input)="calcularVuelto()"
-        />
-
-        <!-- Vuelto -->
-        <div class="mt-3">
-          <span class="font-semibold text-gray-700">Vuelto: </span>
-          <span class="text-lg font-bold text-green-600">
-            {{ vuelto | currency:'ARS' }}
-          </span>
-        </div>
-      </div>
-
-      <!-- Código de transferencia -->
-      <div *ngIf="metodo !== 'efectivo'">
-        <label class="block text-gray-700 font-medium mb-2">Código de transferencia</label>
-        <input
-          type="text"
-          [(ngModel)]="codigoTransferencia"
-          name="codigoTransferencia"
-          placeholder="Ej: 123ABC456"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Botones -->
-      <div class="flex justify-between gap-4 pt-6">
-        <!-- <button
+    <!-- Botones -->
+    <div class="flex justify-between gap-4 pt-6">
+      <!-- <button
           mat-stroked-button
           color="warn"
           class="flex-1 rounded-lg font-semibold"
@@ -76,14 +72,14 @@
         >
           Cancelar
         </button> -->
-        <button
-          mat-raised-button
-          color="primary"
-          class="flex-1 rounded-lg font-semibold"
-          type="submit"
-        >
-          Confirmar Pago
-        </button>
-      </div>
-    </form>
-  </div>
+      <button
+        mat-raised-button
+        color="primary"
+        class="flex-1 rounded-lg font-semibold"
+        type="submit"
+      >
+        Confirmar Pago
+      </button>
+    </div>
+  </form>
+</div>
