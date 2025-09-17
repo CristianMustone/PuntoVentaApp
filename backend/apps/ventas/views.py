@@ -8,6 +8,7 @@ class VentaListView(generics.ListAPIView):
     serializer_class = VentaSerializer
     permission_classes = [permissions.IsAuthenticated]  # Solo logueados pueden ver
     def get_queryset(self):
+        print("hola")
         empresa = self.request.user.empresa  # asumiendo que tu modelo de usuario tiene el campo empresa
         return Venta.objects.filter(empresa=empresa).order_by("-fecha")
     

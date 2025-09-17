@@ -2,14 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// export interface Venta {
-//   id: number;
-//   fecha: string;
-//   cliente: string;
-//   total: number;
-//   // 👆 agregá todos los campos que tenga tu serializer
-// }
-
 export interface Venta {
   metodo_pago: string;
   nro_transferencia?: string | null;
@@ -18,7 +10,7 @@ export interface Venta {
   vuelto?: number | null;
   empresa: string;
   productos: {
-    producto: string; // ID del producto
+    cod_barras: string; // ID del producto
     cantidad: number;
     precio_unitario: number;
   }[];

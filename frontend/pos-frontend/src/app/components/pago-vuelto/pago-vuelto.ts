@@ -24,11 +24,7 @@ export class PayComponent {
   codigoTransferencia: string = '';
   empresaUsuario: string = '';
 
-  constructor(
-    private cartService: CartService,
-    private ventaService: VentasService,
-    private authService: AuthService
-  ) {
+  constructor(private cartService: CartService, private ventaService: VentasService) {
     // Suscripción al observable
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items as CartItem[];
@@ -54,18 +50,19 @@ export class PayComponent {
 
   confirmarPago() {
     const venta: Venta = {
-      metodo_pago: this.mapMetodoPago(this.metodo), // lo mapeamos al código del backend
+      metodo_pago: this.mapMetodoPago(this.metodo),
       nro_transferencia: this.metodo !== 'efectivo' ? this.codigoTransferencia : null,
       monto_total: this.getTotal(),
       pago: this.metodo === 'efectivo' ? this.montoPagado : 0,
       vuelto: this.metodo === 'efectivo' ? this.vuelto : 0,
-      empresa: this.empresaUsuario, // aquí puedes cambiarlo dinámicamente si quieres
+      empresa: this.empresaUsuario,
       productos: this.cartItems.map((item) => ({
-        producto: item.cod_barras, // 👈 ID del producto
+        cod_barras: item.cod_barras, // 🔹 usamos cod_barras en lugar de id
         cantidad: item.quantity,
         precio_unitario: item.precio,
       })),
     };
+    console.log(venta);
 
     this.ventaService.addVenta(venta).subscribe({
       next: (res) => {
