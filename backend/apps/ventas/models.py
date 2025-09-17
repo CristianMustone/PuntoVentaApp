@@ -21,6 +21,9 @@ class Venta(models.Model):
 
     productos = models.ManyToManyField(Producto, through='VentaProducto')
 
+    
+    empresa = models.CharField(max_length=100, blank=True, null=True)  # Nombre de la empresa
+
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
 

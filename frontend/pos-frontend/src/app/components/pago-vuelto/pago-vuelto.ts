@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { CartService, CartItem } from '../../services/cart/cart';
 import { CurrencyPipe } from '@angular/common';
+import { VentasService, Venta } from '../../services/sales/sales';
+import { AuthService, LoginResponse } from '../../services/authUser/auth-user';
 
 @Component({
   selector: 'app-pay',
@@ -20,12 +22,24 @@ export class PayComponent {
   vuelto: number = 0;
 
   codigoTransferencia: string = '';
+  empresaUsuario: string = '';
 
-  constructor(private cartService: CartService) {
+  constructor(
+    private cartService: CartService,
+    private ventaService: VentasService,
+    private authService: AuthService
+  ) {
     // Suscripción al observable
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items as CartItem[];
     });
+
+    // 🔹 Recuperar la empresa del usuario logueado desde localStorage
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData) as LoginResponse['user'];
+      this.empresaUsuario = user.empresa;
+    }
   }
 
   calcularVuelto() {
@@ -36,5 +50,48 @@ export class PayComponent {
   }
   getTotal(): number {
     return this.cartService.getTotal();
+  }
+
+  confirmarPago() {
+    const venta: Venta = {
+      metodo_pago: this.mapMetodoPago(this.metodo), // lo mapeamos al código del backend
+      nro_transferencia: this.metodo !== 'efectivo' ? this.codigoTransferencia : null,
+      monto_total: this.getTotal(),
+      pago: this.metodo === 'efectivo' ? this.montoPagado : 0,
+      vuelto: this.metodo === 'efectivo' ? this.vuelto : 0,
+      empresa: this.empresaUsuario, // aquí puedes cambiarlo dinámicamente si quieres
+      productos: this.cartItems.map((item) => ({
+        producto: item.cod_barras, // 👈 ID del producto
+        cantidad: item.quantity,
+        precio_unitario: item.precio,
+      })),
+    };
+
+    this.ventaService.addVenta(venta).subscribe({
+      next: (res) => {
+        alert('✅ Venta registrada con éxito');
+        this.cartService.clearCart(); // limpiar carrito
+      },
+      error: (err) => {
+        alert('❌ Error al registrar la venta');
+      },
+    });
+  }
+
+  private mapMetodoPago(frontMetodo: string): string {
+    switch (frontMetodo) {
+      case 'efectivo':
+        return 'EF';
+      case 'debito':
+        return 'DB';
+      case 'credito':
+        return 'CR';
+      case 'mercadopago':
+        return 'MP';
+      case 'transferencia':
+        return 'TR';
+      default:
+        return 'EF';
+    }
   }
 }

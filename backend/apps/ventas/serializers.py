@@ -18,7 +18,7 @@ class VentaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Venta
-        fields = ["fecha", "metodo_pago", "nro_transferencia", "monto_total", "pago", "vuelto", "productos"]
+        fields = ["fecha", "metodo_pago", "nro_transferencia", "monto_total", "pago", "vuelto", "empresa", "productos"]
 
     def get_productos(self, obj):
         productos = VentaProducto.objects.filter(venta=obj)
