@@ -80,13 +80,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'posdb',
-        'USER': 'cristian',
-        'PASSWORD': '0112358',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get('POSTGRES_DB', 'posdb'),
+        'USER': os.environ.get('POSTGRES_USER', 'cristian'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '0112358'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'db'),  # el nombre del servicio docker
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),  # siempre un número
     }
 }
+
 
 AUTH_USER_MODEL = 'usuarios.CustomUser'
 
